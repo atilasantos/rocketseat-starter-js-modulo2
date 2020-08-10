@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <button>Ok</button>
+    <input type="text" name="nome">
+    <button onclick="adicionar();">Adicionar</button>
+</head>
+<body onload="exibeLista();">
+    <script>       
+        var nomes = ["Diego", "Gabriel", "Lucas","Pietro"];
+        var btnElement = document.querySelector('button');
+        btnElement.onclick = function () {
+
+            var divElement = document.createElement("div")
+            divElement.setAttribute("onmouseover","changeColor(this);");
+            divElement.style = 'width:100px;height:100px;border:1px solid black;display:flex;background-color:red;margin-top:2px';
+            document.body.appendChild(divElement);
+        }
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+           }
+
+        function changeColor(divElement) {
+            divElement.style.backgroundColor = getRandomColor();
+        }
+
+        function exibeLista() {
+            var ulElement = document.createElement('ul');
+            document.body.appendChild(ulElement);
+            for(nome in nomes) {
+                var liElement = document.createElement('Li');
+                var liText = document.createTextNode(nomes[nome]);
+                liElement.appendChild(liText);
+                liElement.setAttribute('id',nome);
+                document.querySelector('ul').appendChild(liElement);
+            }
+        };
+        
+
+        function adicionar() {
+            var textElement = document.querySelector('input').value;
+            nomes.push(textElement);
+            var liElement = document.createElement('Li');
+            var liText = document.createTextNode(nomes[nomes.length - 1]);
+            liElement.appendChild(liText);
+            liElement.setAttribute('id',nomes.length-1);
+            document.querySelector('ul').appendChild(liElement);
+        }
+        
+    </script>
+</body>
+</html>
